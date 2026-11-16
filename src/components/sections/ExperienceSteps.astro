@@ -1,0 +1,27 @@
+---
+import type { ExperienceStep } from '@/lib/experience';
+
+interface Props {
+  steps: ExperienceStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="mt-[18px] flex max-w-[780px] flex-col gap-5 border-s-2 border-line ps-5" role="list">
+  {steps.map((step) => (
+    <li class="relative">
+      <span
+        aria-hidden="true"
+        class:list={[
+          'absolute -start-[27px] top-1 h-3 w-3 rounded-full',
+          step.highlight ? 'bg-accent' : 'border-2 border-muted bg-surface',
+        ]}
+      />
+      <p class:list={['font-mono text-xs', step.highlight ? 'text-accent' : 'text-muted']}>
+        {step.period} · {step.title}
+      </p>
+      <p class="mt-1.5 leading-[1.7]">{step.text}</p>
+    </li>
+  ))}
+</ol>

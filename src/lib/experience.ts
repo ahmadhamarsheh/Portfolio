@@ -98,7 +98,8 @@ export function buildGrowthPath(items: readonly ExperienceItem[]): GrowthStep[] 
       index,
       label: list[0]?.stage.label ?? '',
       year: Math.min(...list.map((i) => i.start)),
-      companies: list.map((i) => i.company),
+      // Oldest first, so the stage's start year belongs to the first company named.
+      companies: [...list].reverse().map((i) => i.company),
       current: list.some(isCurrent),
     }));
 }

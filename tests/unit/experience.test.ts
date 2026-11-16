@@ -71,7 +71,7 @@ describe('buildGrowthPath', () => {
         index: 1,
         label: 'Foundations',
         year: 2021,
-        companies: ['road9', 'finprivado'],
+        companies: ['finprivado', 'road9'],
         current: false,
       },
       { index: 2, label: 'Scale', year: 2024, companies: ['jawwal'], current: false },
