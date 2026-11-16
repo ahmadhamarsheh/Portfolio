@@ -1,0 +1,29 @@
+# build output
+dist/
+.astro/
+.wrangler/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# local secrets — never commit these
+.env
+.env.*
+!.env.example
+.dev.vars
+!.dev.vars.example
+
+# test & audit artefacts
+playwright-report/
+test-results/
+.lighthouseci/
+coverage/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
