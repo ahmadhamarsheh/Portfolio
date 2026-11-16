@@ -1,0 +1,95 @@
+---
+import '@fontsource/ibm-plex-sans/latin-400.css';
+import '@fontsource/ibm-plex-sans/latin-600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
+import '@/styles/global.css';
+
+// Two weights per script (400 body, 600 headings) keep font bytes low; the
+// heading weight is preloaded because the hero title is the LCP element. Arabic pages
+// also preload the Latin body font: their text mixes in English terms, and a late
+// swap would reflow the hero (layout shift).
+import latinBodyFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import latinHeadingFont from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?url';
+import arabicBodyFont from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
+import arabicHeadingFont from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2?url';
+import Footer from '@/components/layout/Footer.astro';
+import Header from '@/components/layout/Header.astro';
+import SeoHead from '@/components/layout/SeoHead.astro';
+import { dir, useTranslations, type Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  alternates?: boolean;
+  jsonLd?: unknown;
+  /** Minimal chrome (no header/footer) — used by the printable CV. */
+  bare?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  ogImage = '/og/home.png',
+  noindex = false,
+  alternates = true,
+  jsonLd,
+  bare = false,
+} = Astro.props;
+const t = useTranslations(lang);
+const pageTitle = title ?? t('meta.title');
+const pageDescription = description ?? t('meta.description');
+---
+
+<!doctype html>
+<html lang={lang} dir={dir(lang)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline src="/theme-init.js"></script>
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)" />
+    {(lang === 'ar'
+      ? [arabicHeadingFont, arabicBodyFont, latinBodyFont]
+      : [latinHeadingFont, latinBodyFont]
+    ).map((href) => (
+      <link rel="preload" href={href} as="font" type="font/woff2" crossorigin="anonymous" />
+    ))}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <SeoHead
+      lang={lang}
+      title={pageTitle}
+      description={pageDescription}
+      ogImage={ogImage}
+      noindex={noindex}
+      alternates={alternates}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body class="min-h-screen">
+    {!bare && (
+      <a
+        href="#main"
+        class="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-semibold focus:text-accent-ink"
+      >
+        {t('a11y.skip')}
+      </a>
+    )}
+    {!bare && <Header lang={lang} showLangSwitch={alternates} />}
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    {!bare && <Footer lang={lang} />}
+    <script>
+      import '@/scripts/site';
+    </script>
+  </body>
+</html>

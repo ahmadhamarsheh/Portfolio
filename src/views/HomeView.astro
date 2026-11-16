@@ -1,0 +1,60 @@
+---
+import About from '@/components/sections/About.astro';
+import Contact from '@/components/sections/Contact.astro';
+import Experience from '@/components/sections/Experience.astro';
+import Hero from '@/components/sections/Hero.astro';
+import Services from '@/components/sections/Services.astro';
+import Work from '@/components/sections/Work.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '@/i18n';
+import {
+  getCaseStudies,
+  getExperienceView,
+  getProfile,
+  getServices,
+  getSkills,
+} from '@/lib/content';
+import { buildPersonGraph } from '@/lib/seo';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const [profile, caseStudies, experience, services, skills] = await Promise.all([
+  getProfile(lang),
+  getCaseStudies(lang),
+  getExperienceView(lang),
+  getServices(lang),
+  getSkills(lang),
+]);
+
+const jsonLd = buildPersonGraph({
+  siteUrl: (Astro.site ?? new URL('https://ahmadhamarsheh.pages.dev')).href,
+  jobTitle: 'Senior Backend Engineer',
+  description: t('meta.description'),
+  knowsAbout: [
+    'Backend engineering',
+    'Java',
+    'Spring Boot',
+    '.NET',
+    'Python',
+    'Django',
+    'Payment gateway integration',
+    'KYC',
+    'PostgreSQL',
+    'Distributed systems',
+  ],
+});
+---
+
+<BaseLayout lang={lang} jsonLd={jsonLd}>
+  <Hero lang={lang} profile={profile} />
+  <Work lang={lang} caseStudies={caseStudies} />
+  <Experience lang={lang} blocks={experience.blocks} growth={experience.growth} profile={profile} />
+  <Services lang={lang} services={services} />
+  <About lang={lang} profile={profile} skills={skills} />
+  <Contact lang={lang} />
+</BaseLayout>

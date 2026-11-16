@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCaseStudies, type CaseStudy } from '@/lib/content';
+import CaseStudyView from '@/views/CaseStudyView.astro';
+
+export const getStaticPaths = (async () => {
+  const caseStudies = await getCaseStudies('ar');
+  return caseStudies.map((cs) => ({ params: { slug: cs.key }, props: { cs } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  cs: CaseStudy;
+}
+
+const { cs } = Astro.props;
+---
+
+<CaseStudyView lang="ar" cs={cs} />

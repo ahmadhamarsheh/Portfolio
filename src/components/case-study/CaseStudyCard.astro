@@ -1,0 +1,37 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { localizePath, useTranslations, type Lang } from '@/i18n';
+import type { CaseStudy } from '@/lib/content';
+
+interface Props {
+  lang: Lang;
+  cs: CaseStudy;
+  headingLevel?: 'h3' | 'h4';
+}
+
+const { lang, cs, headingLevel = 'h3' } = Astro.props;
+const t = useTranslations(lang);
+const href = localizePath(`/work/${cs.key}/`, lang);
+const Heading = headingLevel;
+---
+
+<article class="group relative flex flex-col gap-4 rounded-[10px] border border-line bg-surface p-6 transition-colors hover:border-accent">
+  <p class="kicker">{cs.kicker}</p>
+  <Heading class="text-xl leading-snug font-semibold">
+    <a href={href} class="after:absolute after:inset-0 after:content-['']">
+      {cs.title}
+    </a>
+  </Heading>
+  <p class="leading-relaxed text-muted">{cs.summary}</p>
+  <p dir="auto" class="mt-auto font-mono text-[13px] text-muted rtl:text-right">
+    {cs.facts.stack.slice(0, 4).join(' · ')}
+  </p>
+  <span class="inline-flex items-center gap-2 text-sm font-semibold text-accent" aria-hidden="true">
+    {t('work.read')}
+    <Icon
+      name="arrowRight"
+      size={16}
+      class="flip-rtl transition-transform group-hover:translate-x-0.5"
+    />
+  </span>
+</article>

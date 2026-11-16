@@ -1,0 +1,60 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { siteConfig } from '@/config/site';
+import { useTranslations, type Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div class="container-page flex flex-col gap-6 py-10 text-sm text-muted md:flex-row md:items-center md:justify-between">
+    <p>
+      {`© ${year} ${lang === 'ar' ? 'أحمد حمارشة' : siteConfig.name}. ${t('footer.rights')}`}
+      <span class="block pt-1 font-mono text-xs">{t('footer.built')}</span>
+    </p>
+    <ul class="flex flex-wrap items-center gap-x-6 gap-y-2" role="list">
+      <li>
+        <a
+          href={`mailto:${siteConfig.email}`}
+          class="inline-flex items-center gap-2 py-2 hover:text-accent"
+        >
+          <Icon name="mail" size={16} />
+          {siteConfig.email}
+        </a>
+      </li>
+      <li>
+        <a
+          href={siteConfig.linkedin}
+          rel="me noopener"
+          class="inline-flex items-center gap-1.5 py-2 hover:text-accent"
+        >
+          LinkedIn <Icon name="external" size={14} />
+        </a>
+      </li>
+      <li>
+        <a
+          href={siteConfig.github}
+          rel="me noopener"
+          class="inline-flex items-center gap-1.5 py-2 hover:text-accent"
+        >
+          GitHub <Icon name="external" size={14} />
+        </a>
+      </li>
+      <li>
+        <a
+          href={siteConfig.sourceRepo}
+          rel="noopener"
+          class="inline-flex items-center gap-1.5 py-2 hover:text-accent"
+        >
+          {t('footer.source')} <Icon name="external" size={14} />
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

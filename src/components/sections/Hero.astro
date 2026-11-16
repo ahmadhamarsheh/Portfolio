@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '@/assets/ahmad-hamarsheh.jpg';
+import Icon from '@/components/ui/Icon.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
+import { siteConfig } from '@/config/site';
+import { useTranslations, type Lang } from '@/i18n';
+import type { Profile } from '@/lib/content';
+
+interface Props {
+  lang: Lang;
+  profile: Profile;
+}
+
+const { lang, profile } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="blueprint border-b border-line" aria-labelledby="hero-title">
+  <div class="container-page pt-16 pb-16 md:pt-24 md:pb-[72px]">
+    <div class="flex flex-wrap items-center gap-x-14 gap-y-12">
+      <div class="flex min-w-0 flex-[1_1_560px] flex-col gap-6">
+        <p class="eyebrow min-h-[43px] font-mono text-[13px] leading-relaxed text-muted sm:min-h-0">
+          <span
+            aria-hidden="true"
+            class="me-2.5 inline-block h-2 w-2 rounded-full bg-accent align-middle"
+          ></span>
+          {profile.eyebrow}
+        </p>
+        <h1
+          id="hero-title"
+          class="text-[clamp(2.5rem,5.6vw,4.75rem)] leading-[1.06] font-semibold tracking-[-0.03em]"
+        >
+          {profile.heroTitle.lead} <span class="text-accent">{profile.heroTitle.accent}</span>
+        </h1>
+        <p class="max-w-[620px] text-lg leading-[1.65] text-muted">{profile.heroLede}</p>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <LinkButton href="#contact" size="lg">
+            {t('cta.hire')}
+          </LinkButton>
+          <LinkButton href="#work" size="lg" variant="secondary">
+            {t('cta.work')}
+          </LinkButton>
+          <LinkButton href={siteConfig.cvPath} size="lg" variant="ghost" download hreflang="en">
+            <Icon name="download" />
+            {t('cta.cv')}
+          </LinkButton>
+        </div>
+      </div>
+
+      <div class="flex min-w-0 flex-[1_1_380px] flex-col gap-5 rounded-[10px] border border-line bg-surface p-6">
+        <div class="flex items-center gap-4">
+          <Image
+            src={portrait}
+            alt={t('hero.photoAlt')}
+            width={176}
+            height={176}
+            densities={[1, 2]}
+            loading="eager"
+            fetchpriority="high"
+            class="h-[88px] w-[88px] flex-none rounded-full object-cover"
+          />
+          <div class="flex flex-col gap-0.5">
+            <span class="text-[17px] font-semibold">{profile.name}</span>
+            <span class="text-sm text-muted">{profile.cardSubtitle}</span>
+          </div>
+        </div>
+        <dl class="grid grid-cols-[96px_minmax(0,1fr)] gap-x-4 gap-y-3 border-t border-line pt-[18px] text-sm leading-normal">
+          {profile.glance.map((row) => (
+            <>
+              <dt class="pt-0.5 font-mono text-xs text-muted">{row.label}</dt>
+              <dd dir="auto" class="rtl:text-right">
+                {row.value}
+              </dd>
+            </>
+          ))}
+        </dl>
+      </div>
+    </div>
+
+    <dl class="mt-16 grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+      {profile.metrics.map((metric) => (
+        <div class="flex flex-col-reverse justify-end gap-1 pt-6 pe-6">
+          <dt class="text-sm text-muted">{metric.label}</dt>
+          <dd class="text-[32px] leading-tight font-semibold tracking-[-0.02em]">{metric.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="mt-10 flex flex-wrap items-baseline gap-x-7 gap-y-2">
+      <p class="font-mono text-xs text-muted">{t('hero.experienceAt')}</p>
+      <ul class="flex flex-wrap gap-x-7 gap-y-2" role="list">
+        {profile.experienceAt.map((company) => (
+          <li class="text-lg font-semibold">{company}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

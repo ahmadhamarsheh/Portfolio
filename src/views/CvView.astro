@@ -1,0 +1,121 @@
+---
+/**
+ * Printable CV generated from the same content as the website, so the PDF can
+ * never drift from the site. `npm run cv:pdf` prints this page to
+ * public/cv/Ahmad-Hamarsheh-CV.pdf.
+ */
+import '@/styles/cv.css';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config/site';
+import { useTranslations } from '@/i18n';
+import { getCaseStudies, getExperience, getProfile, getSkills } from '@/lib/content';
+import { formatPeriod } from '@/lib/experience';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+const [profile, experience, caseStudies, skills] = await Promise.all([
+  getProfile(lang),
+  getExperience(lang),
+  getCaseStudies(lang),
+  getSkills(lang),
+]);
+const site = (Astro.site ?? new URL('https://ahmadhamarsheh.pages.dev')).host;
+const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
+---
+
+<BaseLayout lang={lang} title={`${profile.name} — CV`} noindex alternates={false} bare>
+  <div class="cv">
+    <header class="cv-header">
+      <h1>{profile.name}</h1>
+      <p class="cv-headline">{profile.headline}</p>
+      <p class="cv-contact">
+        <span>Remote · Open to clients worldwide</span>
+        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        <a href={siteConfig.linkedin}>{strip(siteConfig.linkedin)}</a>
+        <a href={siteConfig.github}>{strip(siteConfig.github)}</a>
+        <a href={`https://${site}`}>{site}</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p>{profile.cvSummary}</p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      {experience.map((item) => (
+        <article class="cv-role">
+          <div class="cv-role-head">
+            <h3>
+              {item.role} · {item.company}
+            </h3>
+            <span class="cv-period">{formatPeriod(item.start, item.end, t('exp.present'))}</span>
+          </div>
+          <p class="cv-muted">{item.context}</p>
+          {item.summary && <p>{item.summary}</p>}
+          {item.steps && (
+            <ul>
+              {item.steps.map((step) => (
+                <li>
+                  <strong>
+                    {step.period} — {step.title}:
+                  </strong>{' '}
+                  {step.text}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p class="cv-stack">{item.stack.join(' · ')}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="cv-case-studies">
+      <h2>Selected case studies</h2>
+      <ul>
+        {caseStudies.map((cs) => (
+          <li>
+            <strong>{cs.title}.</strong> {cs.summary}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="cv-columns">
+      <div>
+        <h2>Skills</h2>
+        <dl class="cv-skills">
+          {[...skills.strong, ...skills.working].map((group) => (
+            <div>
+              <dt>{group.title}</dt>
+              <dd>{group.items.join(', ')}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h2>Education</h2>
+        <ul class="cv-plain">
+          {profile.education.map((e) => (
+            <li>
+              <strong>{e.degree}</strong> — {e.school}
+              {e.note ? ` (${e.note})` : ''}
+            </li>
+          ))}
+        </ul>
+        <h2>Certification</h2>
+        <ul class="cv-plain">
+          {profile.certifications.map((c) => (
+            <li>
+              {c.name}
+              {c.note ? ` — ${c.note}` : ''}
+            </li>
+          ))}
+        </ul>
+        <h2>Languages</h2>
+        <p>{profile.languagesSpoken}</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

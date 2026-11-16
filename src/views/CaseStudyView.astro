@@ -1,0 +1,78 @@
+---
+import CaseStudyBody from '@/components/case-study/CaseStudyBody.astro';
+import CaseStudyCard from '@/components/case-study/CaseStudyCard.astro';
+import Icon from '@/components/ui/Icon.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { localizePath, useTranslations, type Lang } from '@/i18n';
+import { getCaseStudies, type CaseStudy } from '@/lib/content';
+
+interface Props {
+  lang: Lang;
+  cs: CaseStudy;
+}
+
+const { lang, cs } = Astro.props;
+const t = useTranslations(lang);
+const all = await getCaseStudies(lang);
+const index = all.findIndex((c) => c.key === cs.key);
+const next = all[(index + 1) % all.length];
+const home = localizePath('/', lang);
+const name = lang === 'ar' ? 'أحمد حمارشة' : 'Ahmad Hamarsheh';
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${cs.title} — ${name}`}
+  description={cs.summary}
+  ogImage={`/og/work/${cs.key}.png`}
+>
+  <article aria-labelledby="cs-title">
+    <header class="blueprint border-b border-line">
+      <div class="container-page pt-12 pb-14 md:pt-16">
+        <a
+          href={`${home}#work`}
+          class="inline-flex items-center gap-2 py-2 text-sm text-muted hover:text-accent"
+        >
+          <Icon name="arrowLeft" size={16} class="flip-rtl" />
+          {t('work.all')}
+        </a>
+        <p class="kicker mt-6">
+          {t('cs.caseStudy')} {String(cs.order).padStart(2, '0')} · {cs.kicker}
+        </p>
+        <h1
+          id="cs-title"
+          class="mt-3.5 max-w-[900px] text-[clamp(2rem,4.4vw,3.5rem)] leading-[1.08] font-semibold tracking-[-0.03em]"
+        >
+          {cs.title}
+        </h1>
+        <p class="mt-5 max-w-[760px] text-lg leading-relaxed text-muted">{cs.summary}</p>
+      </div>
+    </header>
+
+    <div class="container-page pt-4 pb-20 md:pb-[104px]">
+      <CaseStudyBody lang={lang} cs={cs} sub="h2" />
+    </div>
+  </article>
+
+  <aside class="border-t border-line bg-surface" aria-labelledby="next-title">
+    <div class="container-page flex flex-wrap items-start gap-10 py-16">
+      <div class="min-w-0 flex-[1_1_420px]">
+        <h2 id="next-title" class="label">
+          {t('work.next')}
+        </h2>
+        <div class="mt-5">
+          {next && next.key !== cs.key && <CaseStudyCard lang={lang} cs={next} />}
+        </div>
+      </div>
+      <div class="flex min-w-0 flex-[1_1_320px] flex-col items-start gap-5">
+        <p class="text-[clamp(1.5rem,2.6vw,2rem)] leading-tight font-semibold">
+          {t('contact.title')}
+        </p>
+        <LinkButton href={`${home}#contact`} size="lg">
+          {t('cta.hire')}
+        </LinkButton>
+      </div>
+    </div>
+  </aside>
+</BaseLayout>

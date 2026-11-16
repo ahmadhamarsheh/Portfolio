@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+
+/* Dark mode is driven by data-theme on <html> (set before first paint by /theme-init.js). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Design tokens — "Blueprint" direction.
+ * Utilities like bg-surface, text-muted, border-line read these variables,
+ * so switching theme is a single attribute change.
+ */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-signal: var(--signal);
+  --color-arrow: var(--arrow);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  --font-sans: 'IBM Plex Sans', 'IBM Plex Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  /* Plex Mono has no Arabic glyphs; the browser falls back per glyph to Plex Sans Arabic. */
+  --font-mono: 'IBM Plex Mono', 'IBM Plex Sans Arabic', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0b1220;
+  --surface: #0f1a2c;
+  --surface-2: #13213a;
+  --line: #1f2e4a;
+  --grid: rgb(120 150 200 / 0.05);
+  --fg: #e6edf7;
+  --muted: #94a3b8;
+  --accent: #f5a524;
+  --accent-ink: #0b1220;
+  --accent-soft: rgb(245 165 36 / 0.1);
+  --signal: #38bdf8;
+  --arrow: #5b6b85;
+  --danger: #fda4af;
+  --success: #86efac;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --surface-2: #eef2f8;
+  --line: #d9e1ec;
+  --grid: rgb(30 60 110 / 0.05);
+  --fg: #0b1220;
+  --muted: #475569;
+  --accent: #a84d08;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(168 77 8 / 0.07);
+  --signal: #0369a1;
+  --arrow: #8c9ab0;
+  --danger: #b91c1c;
+  --success: #15803d;
+}
+
+/* Without JavaScript, follow the operating system preference. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --bg: #f6f8fb;
+    --surface: #ffffff;
+    --surface-2: #eef2f8;
+    --line: #d9e1ec;
+    --grid: rgb(30 60 110 / 0.05);
+    --fg: #0b1220;
+    --muted: #475569;
+    --accent: #a84d08;
+    --accent-ink: #ffffff;
+    --accent-soft: rgb(168 77 8 / 0.07);
+    --signal: #0369a1;
+    --arrow: #8c9ab0;
+    --danger: #b91c1c;
+    --success: #15803d;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  html[lang='ar'] body {
+    font-family: var(--font-arabic);
+  }
+
+  /* Arabic needs a little more line height to breathe. */
+  html[lang='ar'] p,
+  html[lang='ar'] li,
+  html[lang='ar'] dd {
+    line-height: 1.85;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  [id] {
+    scroll-margin-top: 88px;
+  }
+}
+
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1200px;
+    padding-inline: 1.5rem;
+  }
+
+  /* Blueprint grid paper, used sparingly (hero and diagrams). */
+  .blueprint {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--accent);
+  }
+
+  .label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  html[lang='ar'] .label {
+    letter-spacing: 0;
+  }
+
+  /* Arabic kickers and eyebrows read better (and reflow less) in the Arabic sans than in a monospace stack. */
+  html[lang='ar'] :is(.kicker, .eyebrow) {
+    font-family: var(--font-arabic);
+  }
+
+  /* Arrows and chevrons point the reading direction. */
+  html[dir='rtl'] .flip-rtl {
+    transform: scaleX(-1);
+  }
+}
+
+/*
+ * Unlayered on purpose so it wins over tracking utilities: Arabic is a
+ * connected script, and negative letter-spacing breaks its joins.
+ */
+html[lang='ar'] :is(h1, h2, h3, h4, p, span, a, li, dt, dd, button) {
+  letter-spacing: 0;
+}

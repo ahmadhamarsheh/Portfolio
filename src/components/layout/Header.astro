@@ -1,0 +1,123 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { alternatePath, localizePath, useTranslations, type Lang } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+  /** Hide the language switch on pages that exist in one language only. */
+  showLangSwitch?: boolean;
+}
+
+const { lang, showLangSwitch = true } = Astro.props;
+const t = useTranslations(lang);
+const home = localizePath('/', lang);
+const otherLang: Lang = lang === 'en' ? 'ar' : 'en';
+const switchHref = alternatePath(Astro.url.pathname, otherLang);
+
+const links = [
+  { href: `${home}#work`, label: t('nav.work') },
+  { href: `${home}#experience`, label: t('nav.experience') },
+  { href: `${home}#services`, label: t('nav.services') },
+  { href: `${home}#about`, label: t('nav.about') },
+  { href: `${home}#contact`, label: t('nav.contact') },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur supports-[backdrop-filter]:bg-bg/80">
+  <nav
+    aria-label={t('nav.label')}
+    class="container-page flex items-center justify-between gap-4 py-3"
+  >
+    <a
+      href={home}
+      class="min-w-0 truncate py-2.5 text-base font-semibold"
+      aria-label={t('nav.home')}
+    >
+      {lang === 'ar' ? 'أحمد حمارشة' : 'Ahmad Hamarsheh'}
+    </a>
+
+    <ul class="hidden items-center gap-7 text-sm md:flex" role="list">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} class="py-3 text-muted transition-colors hover:text-accent">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-2">
+      {showLangSwitch && (
+        <a
+          href={switchHref}
+          hreflang={otherLang}
+          lang={otherLang}
+          title={t('lang.switchLabel')}
+          class="hidden h-11 items-center rounded-md border border-line px-3.5 text-sm transition-colors hover:border-accent hover:text-accent min-[400px]:inline-flex"
+        >
+          {t('lang.switch')}
+        </a>
+      )}
+      <button
+        type="button"
+        data-theme-toggle
+        data-label-to-light={t('theme.toLight')}
+        data-label-to-dark={t('theme.toDark')}
+        aria-label={t('theme.toLight')}
+        class="inline-flex h-11 w-11 items-center justify-center rounded-md border border-line transition-colors hover:border-accent hover:text-accent"
+      >
+        <Icon name="sun" class="hidden dark:block" />
+        <Icon name="moon" class="block dark:hidden" />
+      </button>
+      <a
+        href={`${home}#contact`}
+        class="hidden h-11 items-center rounded-md bg-accent px-[18px] text-sm font-semibold text-accent-ink transition hover:brightness-110 sm:inline-flex"
+      >
+        {t('cta.hire')}
+      </a>
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-md border border-line md:hidden"
+      >
+        <span class="sr-only">{t('nav.menu')}</span>
+        <Icon name="menu" />
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-nav" hidden class="border-t border-line md:hidden">
+    <ul class="container-page flex flex-col py-2" role="list">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} data-menu-link class="block py-3 text-base text-fg hover:text-accent">
+            {link.label}
+          </a>
+        </li>
+      ))}
+      {showLangSwitch && (
+        <li class="min-[400px]:hidden">
+          <a
+            href={switchHref}
+            hreflang={otherLang}
+            lang={otherLang}
+            class="block py-3 text-base text-fg hover:text-accent"
+          >
+            {t('lang.switch')}
+          </a>
+        </li>
+      )}
+      <li class="pt-2 pb-3 sm:hidden">
+        <a
+          href={`${home}#contact`}
+          data-menu-link
+          class="inline-flex h-11 items-center rounded-md bg-accent px-[18px] text-sm font-semibold text-accent-ink"
+        >
+          {t('cta.hire')}
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
