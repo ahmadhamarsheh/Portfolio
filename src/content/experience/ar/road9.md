@@ -4,7 +4,7 @@ key: road9
 company: Road9
 role: مهندس Backend
 context: عن بُعد · عملاء تكنولوجيا مالية أمريكيون
-start: 2021
+start: 2022
 end: 2024
 stage:
   index: 1
@@ -13,7 +13,7 @@ group:
   key: fintech-foundations
   label: عن بُعد · تكنولوجيا مالية أمريكية
 steps:
-  - period: 2021 – 2023
+  - period: 2022 – 2023
     title: مهندس Backend
     text: بنيت خدمات Backend وواجهات REST API لمنصات مالية باستخدام Python/Django وSpring Boot مع PostgreSQL — تصميم المخططات، وتحسين SQL، وتكاملات الدفع والأطراف الخارجية عبر Webhooks وإعادة المحاولة والمعالجة غير المكررة.
   - period: "2024"

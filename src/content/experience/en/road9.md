@@ -4,7 +4,7 @@ key: road9
 company: Road9
 role: Backend Engineer
 context: Remote · US fintech clients
-start: 2021
+start: 2022
 end: 2024
 stage:
   index: 1
@@ -13,7 +13,7 @@ group:
   key: fintech-foundations
   label: Remote · US fintech
 steps:
-  - period: 2021 – 2023
+  - period: 2022 – 2023
     title: Backend Engineer
     text: Built backend services and REST APIs for fintech platforms in Python/Django and Spring Boot over PostgreSQL — schema design, SQL tuning, and payment and third-party integrations with webhooks, retries and idempotent processing.
   - period: "2024"

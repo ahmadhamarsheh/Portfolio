@@ -31,7 +31,7 @@ const items = [
   item({ key: 'apple', start: 2026, end: 'present', stage: { index: 4, label: 'Platforms' } }),
   item({
     key: 'road9',
-    start: 2021,
+    start: 2022,
     end: 2024,
     stage: { index: 1, label: 'Foundations' },
     group: { key: 'g', label: 'Remote' },
