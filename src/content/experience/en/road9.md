@@ -9,9 +9,6 @@ end: 2024
 stage:
   index: 1
   label: Fintech foundations
-group:
-  key: fintech-foundations
-  label: Remote · US fintech
 steps:
   - period: 2022 – 2023
     title: Backend Engineer

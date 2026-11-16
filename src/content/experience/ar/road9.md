@@ -9,9 +9,6 @@ end: 2024
 stage:
   index: 1
   label: أساسيات التكنولوجيا المالية
-group:
-  key: fintech-foundations
-  label: عن بُعد · تكنولوجيا مالية أمريكية
 steps:
   - period: 2022 – 2023
     title: مهندس Backend
