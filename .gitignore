@@ -9,7 +9,7 @@ node_modules/
 # logs
 npm-debug.log*
 
-# local secrets — never commit these
+# local secrets, never commit these
 .env
 .env.*
 !.env.example

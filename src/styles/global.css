@@ -4,7 +4,7 @@
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /*
- * Design tokens — "Blueprint" direction.
+ * Design tokens for the "Blueprint" direction.
  * Utilities like bg-surface, text-muted, border-line read these variables,
  * so switching theme is a single attribute change.
  */

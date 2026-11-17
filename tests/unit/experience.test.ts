@@ -83,8 +83,12 @@ describe('buildGrowthPath', () => {
 
 describe('formatPeriod', () => {
   it('formats ranges, open-ended roles and single years', () => {
-    expect(formatPeriod(2021, 2024, 'Present')).toBe('2021 – 2024');
-    expect(formatPeriod(2026, 'present', 'Present')).toBe('2026 – Present');
-    expect(formatPeriod(2024, 2024, 'Present')).toBe('2024');
+    const en = { range: '{start} to {end}', since: 'Since {start}' };
+    const ar = { range: 'من {start} إلى {end}', since: 'منذ {start}' };
+    expect(formatPeriod(2021, 2024, en)).toBe('2021 to 2024');
+    expect(formatPeriod(2026, 'present', en)).toBe('Since 2026');
+    expect(formatPeriod(2024, 2024, en)).toBe('2024');
+    expect(formatPeriod(2021, 2024, ar)).toBe('من 2021 إلى 2024');
+    expect(formatPeriod(2026, 'present', ar)).toBe('منذ 2026');
   });
 });

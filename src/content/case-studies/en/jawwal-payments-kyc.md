@@ -8,7 +8,7 @@ title: Payment gateways & KYC at Jawwal
 summary: Bills, top-ups and government identity checks for 150,000+ subscribers.
 facts:
   role: Backend & Integration Engineer
-  company: Jawwal — telecom operator
+  company: Jawwal (telecom operator)
   stack: [.NET Core, C#, Oracle, REST]
   observability: [Prometheus, Grafana]
   scope: [Payments, KYC, Reconciliation]
@@ -38,10 +38,10 @@ diagram:
     - { n: 4, x: 864, y: 206 }
 decisions:
   - title: Never fail a payment blindly.
-    text: On a gateway timeout the transaction stays pending in Oracle until a status check or the gateway's callback confirms the final result — then reconciliation closes the loop.
+    text: On a gateway timeout I keep the transaction pending in Oracle until a status check or the gateway's callback confirms the final result. Reconciliation then closes the loop.
     marker: 1
   - title: Tune from the execution plan.
-    text: Stored procedures and views on the hot paths were optimised from their execution plans, not by guesswork.
+    text: I optimised the stored procedures and views on the hot paths from their execution plans, not by guesswork.
     marker: 2
   - title: One reference per payment.
     text: Every payment carries a unique transaction reference, so a retry or a duplicate callback can never charge a subscriber twice.
@@ -50,7 +50,7 @@ decisions:
     text: The Ministry of Interior KYC check is called live during subscriber onboarding and activation, not in a later batch.
     marker: 4
   - title: See problems before subscribers do.
-    text: Production monitored with Prometheus and Grafana dashboards across services and databases.
+    text: I monitored production with Prometheus and Grafana dashboards across services and databases.
 results:
   - { value: "150,000+", label: subscribers served }
   - { value: "~10% faster", label: responses on tuned SQL paths }

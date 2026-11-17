@@ -4,14 +4,14 @@ key: fintech-earnings-payouts
 order: 2
 kicker: Fintech · Earnings & payouts
 title: Earnings & payout engine for a US fintech rewards platform
-summary: A multi-level referral network, an earnings engine and ledger-style payouts — rolled out white-label for a Latin American distributor.
+summary: A multi-level referral network, an earnings engine and ledger-style payouts, rolled out white-label for a Latin American distributor.
 facts:
   role: Backend lead
   company: US fintech client via Road9 (under NDA)
   stack: [Python, Django/DRF, PostgreSQL, Celery, Kubernetes (GKE)]
   scope: [Earnings, Ledger, Payouts, Multi-tenancy]
 problem: A rewards and referral platform pays members for referrals across several levels of the network they build. Every earning had to be calculated correctly, every payout had to be traceable, and the platform had to launch for new distributors under their own brand.
-myRole: I grew into leading the backend. I modelled the referral network, built the earnings engine, ledger-style transactions and payouts, and led the multi-tenant white-label rollout for a Latin American distributor — working directly with the client on technical design and coordinating the team's delivery.
+myRole: I grew into leading the backend. I modelled the referral network, built the earnings engine, ledger-style transactions and payouts, and led the multi-tenant white-label rollout for a Latin American distributor. I worked directly with the client on technical design and coordinated the team's delivery.
 diagram:
   width: 1000
   height: 360

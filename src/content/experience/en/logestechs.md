@@ -9,6 +9,6 @@ end: 2026
 stage:
   index: 3
   label: Resilience & mentoring
-summary: Spring Boot microservices for shipment tracking and inventory, and Salla and Zid integrations designed to survive outages with retries, circuit breakers, fallbacks and queued retries. Cut p95 latency by ~15% through SQL tuning and Redis caching; reviewed code and mentored juniors.
+summary: I built Spring Boot microservices for shipment tracking and inventory, and Salla and Zid integrations that keep working through outages with retries, circuit breakers, fallbacks and queued retries. I cut p95 latency by ~15% with SQL tuning and Redis caching, reviewed code and mentored juniors.
 stack: [Java, Spring Boot, MySQL, Redis, RabbitMQ, Resilience4j]
 ---

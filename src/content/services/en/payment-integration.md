@@ -4,7 +4,7 @@ key: payment-integration
 order: 2
 icon: payments
 title: Payment gateway integration
-summary: Connect a payment gateway so money moves correctly — including the cases where the gateway times out or calls back twice.
+summary: I connect your payment gateway so money moves correctly, including when the gateway times out or calls back twice.
 deliverables:
   - Payment flow with unique references, so retries never double-charge
   - Callback / webhook handling with signature checks where the gateway supports them

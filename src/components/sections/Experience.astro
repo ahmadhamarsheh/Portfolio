@@ -20,12 +20,12 @@ interface Props {
 
 const { lang, blocks, growth, profile } = Astro.props;
 const t = useTranslations(lang);
-const present = t('exp.present');
+const present = { range: t('period.range'), since: t('period.since') };
 const stageLabel = (stage: ExperienceItem['stage']) =>
   `${String(stage.index).padStart(2, '0')} · ${stage.label}`;
 const education = `${profile.education
   .map((e) => `${e.degree}${e.note ? ` (${e.note})` : ''}`)
-  .join(' · ')} — ${profile.education[0]?.school ?? ''}`;
+  .join(' · ')}, ${profile.education[0]?.school ?? ''}`;
 ---
 
 <section id="experience" aria-labelledby="experience-title" class="border-t border-line bg-surface">

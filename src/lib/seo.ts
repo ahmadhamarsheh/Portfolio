@@ -43,7 +43,7 @@ export function buildPersonGraph({
         '@type': 'WebSite',
         '@id': `${base}/#website`,
         url: `${base}/`,
-        name: `${siteConfig.name} — Portfolio`,
+        name: `${siteConfig.name} | Portfolio`,
         inLanguage: ['en', 'ar'],
         publisher: { '@id': personId },
       },

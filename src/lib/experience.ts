@@ -84,7 +84,7 @@ export function groupExperience(sorted: readonly ExperienceItem[]): ExperienceBl
   return blocks;
 }
 
-/** One step per career stage, oldest first — the "growth path" strip. */
+/** One step per career stage, oldest first: the "growth path" strip. */
 export function buildGrowthPath(items: readonly ExperienceItem[]): GrowthStep[] {
   const byStage = new Map<number, ExperienceItem[]>();
   for (const item of sortExperience(items)) {
@@ -104,12 +104,20 @@ export function buildGrowthPath(items: readonly ExperienceItem[]): GrowthStep[] 
     }));
 }
 
-/** "2021 – 2024", "2026 – Present", or "2024" when start and end match. */
+export interface PeriodLabels {
+  /** e.g. "{start} to {end}" */
+  range: string;
+  /** e.g. "Since {start}" */
+  since: string;
+}
+
+/** "2021 to 2024", "Since 2026", or "2024" when start and end match. */
 export function formatPeriod(
   start: number,
   end: ExperienceItem['end'],
-  presentLabel: string,
+  labels: PeriodLabels,
 ): string {
-  if (end === 'present') return `${start} – ${presentLabel}`;
-  return start === end ? `${start}` : `${start} – ${end}`;
+  if (end === 'present') return labels.since.replace('{start}', `${start}`);
+  if (start === end) return `${start}`;
+  return labels.range.replace('{start}', `${start}`).replace('{end}', `${end}`);
 }

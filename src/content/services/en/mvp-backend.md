@@ -4,7 +4,7 @@ key: mvp-backend
 order: 6
 icon: rocket
 title: Backend for MVPs
-summary: A solid backend for your first version — simple enough to ship fast, structured enough to grow.
+summary: I build a solid backend for your first version, simple enough to ship fast and structured enough to grow.
 deliverables:
   - Data model and API designed around your core use cases
   - Authentication, roles and an admin-friendly setup

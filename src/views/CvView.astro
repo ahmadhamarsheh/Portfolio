@@ -23,7 +23,7 @@ const site = (Astro.site ?? new URL('https://ahmadhamarsheh.pages.dev')).host;
 const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
 ---
 
-<BaseLayout lang={lang} title={`${profile.name} — CV`} noindex alternates={false} bare>
+<BaseLayout lang={lang} title={`${profile.name} CV`} noindex alternates={false} bare>
   <div class="cv">
     <header class="cv-header">
       <h1>{profile.name}</h1>
@@ -50,7 +50,12 @@ const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
             <h3>
               {item.role} · {item.company}
             </h3>
-            <span class="cv-period">{formatPeriod(item.start, item.end, t('exp.present'))}</span>
+            <span class="cv-period">
+              {formatPeriod(item.start, item.end, {
+                range: t('period.range'),
+                since: t('period.since'),
+              })}
+            </span>
           </div>
           <p class="cv-muted">{item.context}</p>
           {item.summary && <p>{item.summary}</p>}
@@ -59,7 +64,7 @@ const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
               {item.steps.map((step) => (
                 <li>
                   <strong>
-                    {step.period} — {step.title}:
+                    {step.title} ({step.period}):
                   </strong>{' '}
                   {step.text}
                 </li>
@@ -99,7 +104,7 @@ const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
         <ul class="cv-plain">
           {profile.education.map((e) => (
             <li>
-              <strong>{e.degree}</strong> — {e.school}
+              <strong>{e.degree}</strong>, {e.school}
               {e.note ? ` (${e.note})` : ''}
             </li>
           ))}
@@ -109,7 +114,7 @@ const strip = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
           {profile.certifications.map((c) => (
             <li>
               {c.name}
-              {c.note ? ` — ${c.note}` : ''}
+              {c.note ? ` (${c.note})` : ''}
             </li>
           ))}
         </ul>

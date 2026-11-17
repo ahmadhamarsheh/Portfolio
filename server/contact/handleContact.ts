@@ -9,7 +9,7 @@ import {
 } from './ports';
 
 /**
- * The contact use case — framework-free. It only knows its ports, so it is
+ * The contact use case, framework-free. It only knows its ports, so it is
  * tested with fakes and runs unchanged on Pages Functions or Workers.
  *
  * Order matters: cheap checks first (honeypot, validation), then the rate
@@ -62,7 +62,7 @@ export function createContactHandler(deps: ContactDeps) {
       return { status: 200, body: { ok: true } };
     }
 
-    // 2. Validation — the same rules the browser applied.
+    // 2. Validation: the same rules the browser applied.
     const result = validateContact(body);
     if (!result.ok) {
       return { status: 400, body: { ok: false, error: 'validation', fields: result.errors } };

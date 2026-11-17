@@ -1,5 +1,5 @@
 /**
- * POST /api/contact — Cloudflare Pages Function.
+ * POST /api/contact, a Cloudflare Pages Function.
  *
  * This file is the composition root: it reads configuration, wires concrete
  * adapters into the framework-free use case, and translates HTTP. All

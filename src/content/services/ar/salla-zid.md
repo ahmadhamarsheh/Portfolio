@@ -4,7 +4,7 @@ key: salla-zid
 order: 3
 icon: store
 title: تكاملات Salla وZid
-summary: مزامنة متجرك على Salla أو Zid مع أنظمتك — الطلبات والمنتجات والمخزون والشحنات.
+summary: أزامن متجرك على Salla أو Zid مع أنظمتك، من الطلبات والمنتجات إلى المخزون والشحنات.
 deliverables:
   - مستقبِل Webhooks وعميل API لـ Salla و/أو Zid
   - إعادة المحاولة وقاطع الدارة والبديل حول كل استدعاء خارجي
