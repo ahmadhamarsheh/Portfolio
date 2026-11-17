@@ -10,8 +10,8 @@ export interface RateLimitOptions {
 
 /**
  * Fixed-window limiter on a key-value store (Cloudflare KV in production).
- * KV is eventually consistent, so the limit is approximate under bursts —
- * acceptable for a contact form, where Turnstile is the primary bot defence.
+ * KV is eventually consistent, so the limit is approximate under bursts.
+ * That is acceptable for a contact form, where Turnstile is the primary bot defence.
  */
 export class KvRateLimiter implements RateLimiter {
   constructor(

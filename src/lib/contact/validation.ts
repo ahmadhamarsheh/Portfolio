@@ -1,5 +1,5 @@
 /**
- * Contact form validation — one module, used by the browser (instant feedback)
+ * Contact form validation. One module, used by the browser (instant feedback)
  * and by the server (the source of truth). No dependencies, no DOM, no Node
  * APIs, so it runs in the browser, in Cloudflare Workers and in unit tests.
  *

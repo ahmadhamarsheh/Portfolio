@@ -4,7 +4,7 @@ key: api-development
 order: 1
 icon: api
 title: API development
-summary: Clean, documented REST APIs in Java/Spring Boot, .NET or Python/Django — built to be maintained, not just shipped.
+summary: I build clean, documented REST APIs in Java/Spring Boot, .NET or Python/Django, made to be maintained and not just shipped.
 deliverables:
   - REST API with authentication, validation and consistent error handling
   - OpenAPI / Swagger documentation and a Postman collection

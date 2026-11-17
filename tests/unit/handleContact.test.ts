@@ -75,7 +75,7 @@ describe('createContactHandler', () => {
     expect(email.sent[0]).toMatchObject({
       to: 'me@example.com',
       replyTo: 'sara@example.com',
-      subject: '[Portfolio] Job / contract role — Sara',
+      subject: '[Portfolio] Job / contract role from Sara',
     });
     expect(email.sent[0]?.idempotencyKey).toMatch(/^hash:/);
     expect(limiter.keys).toEqual(['contact:1.2.3.4']);

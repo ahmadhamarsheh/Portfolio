@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 /**
  * The public URL of the site. Override with SITE_URL when a custom domain
- * (e.g. https://ahmadhamarsheh.dev) is attached — no code change needed.
+ * (e.g. https://ahmadhamarsheh.dev) is attached. No code change needed.
  */
 const site = process.env.SITE_URL ?? 'https://ahmadhamarsheh.pages.dev';
 

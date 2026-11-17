@@ -5,7 +5,7 @@ import { z } from 'astro/zod';
 /**
  * Content as data. Each collection is validated at build time: a missing or
  * malformed field fails the build before anything is deployed. Adding a job,
- * case study, service or skill group means adding a file — no code changes.
+ * case study, service or skill group means adding a file. No code changes.
  *
  * Files live in `<collection>/<lang>/<key>.md`. The `key` is shared across
  * languages and a unit test checks that every key exists in every language.

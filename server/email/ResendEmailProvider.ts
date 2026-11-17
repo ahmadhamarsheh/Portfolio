@@ -34,7 +34,7 @@ export class ResendEmailProvider implements EmailProvider {
       }),
     });
 
-    // 409 with an idempotency key: Resend already accepted this email — a duplicate, not a failure.
+    // 409 with an idempotency key: Resend already accepted this email. A duplicate, not a failure.
     if (response.status === 409 && message.idempotencyKey) return;
 
     if (!response.ok) {

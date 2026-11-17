@@ -1,6 +1,6 @@
 /**
- * Ports (interfaces) the contact use case depends on. Concrete adapters —
- * Resend, Turnstile, Cloudflare KV — are plugged in at the edge
+ * Ports (interfaces) the contact use case depends on. Concrete adapters
+ * (Resend, Turnstile, Cloudflare KV) are plugged in at the edge
  * (functions/api/contact.ts). Swapping a provider never touches the use case.
  */
 export interface EmailMessage {
@@ -37,7 +37,7 @@ export interface Logger {
   error(message: string, meta?: Record<string, unknown>): void;
 }
 
-/** Minimal key-value contract — satisfied by Cloudflare KV and by test fakes. */
+/** Minimal key-value contract, satisfied by Cloudflare KV and by test fakes. */
 export interface KeyValueStore {
   get(key: string): Promise<string | null>;
   put(key: string, value: string, options?: { expirationTtl?: number }): Promise<void>;
@@ -49,7 +49,7 @@ export const silentLogger: Logger = {
   error: () => undefined,
 };
 
-/** Structured JSON logs — readable in Cloudflare's log stream. Never logs message bodies. */
+/** Structured JSON logs, readable in Cloudflare's log stream. Never logs message bodies. */
 export const consoleLogger: Logger = {
   info: (message, meta) => console.log(JSON.stringify({ level: 'info', message, ...meta })),
   warn: (message, meta) => console.warn(JSON.stringify({ level: 'warn', message, ...meta })),

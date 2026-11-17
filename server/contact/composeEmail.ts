@@ -22,11 +22,11 @@ export interface ComposeOptions {
  */
 export function composeContactEmail(input: ContactInput, options: ComposeOptions): EmailMessage {
   const topic = TOPIC_LABELS[input.topic];
-  const subject = headerSafe(`[${options.siteName}] ${topic} — ${input.name}`);
+  const subject = headerSafe(`[${options.siteName}] ${topic} from ${input.name}`);
   const rows: Array<[string, string]> = [
     ['Name', input.name],
     ['Email', input.email],
-    ['Company', input.company || '—'],
+    ['Company', input.company || 'Not given'],
     ['Topic', topic],
     ['Language', options.lang === 'ar' ? 'Arabic' : 'English'],
   ];

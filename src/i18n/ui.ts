@@ -1,5 +1,5 @@
 /**
- * UI strings. Every language must provide every key — the `UiDictionary`
+ * UI strings. Every language must provide every key: the `UiDictionary`
  * type makes a missing translation a compile error, and a unit test checks
  * that no value is empty.
  */
@@ -9,9 +9,9 @@ export const defaultLang: Lang = 'en';
 export const langs = Object.keys(languages) as Lang[];
 
 const en = {
-  'meta.title': 'Ahmad Hamarsheh — Senior Backend Engineer',
+  'meta.title': 'Ahmad Hamarsheh | Senior Backend Engineer',
   'meta.description':
-    'Senior Backend Engineer working remotely with clients worldwide. 5+ years building payment, payout, KYC and e-commerce integration systems in Java/Spring Boot, .NET and Python/Django.',
+    'I am a Senior Backend Engineer working remotely with clients worldwide. For 5+ years I have built payment, payout, KYC and e-commerce integration systems in Java/Spring Boot, .NET and Python/Django.',
   'meta.locale': 'en_US',
 
   'a11y.skip': 'Skip to content',
@@ -22,7 +22,7 @@ const en = {
   'nav.about': 'About',
   'nav.contact': 'Contact',
   'nav.menu': 'Menu',
-  'nav.home': 'Ahmad Hamarsheh — home',
+  'nav.home': 'Ahmad Hamarsheh, home',
 
   'lang.switch': 'عربي',
   'lang.switchLabel': 'اقرأ الموقع بالعربية',
@@ -39,7 +39,7 @@ const en = {
   'work.kicker': 'Selected work',
   'work.title': 'Case studies',
   'work.lede':
-    'Real systems, described by problem, architecture and decisions. Client names and data stay confidential where an NDA applies.',
+    'Systems I built, told through the problem, the architecture and the decisions. Where an NDA applies, I keep client names and data private.',
   'work.more': 'More case studies',
   'work.read': 'Read the case study',
   'work.all': 'All case studies',
@@ -64,9 +64,10 @@ const en = {
   'exp.kicker': 'Experience',
   'exp.title': 'Five years of growing scale and responsibility.',
   'exp.lede':
-    'Started in 2021 building fintech backends for US clients and grew into leading one of those platforms — then payments and identity at telecom scale, resilient logistics microservices, and today internal engineering platforms at Apple.',
+    'I started in 2021 building fintech backends for US clients and grew into leading one of those platforms. Then came payments and identity at telecom scale, resilient logistics microservices, and now internal engineering platforms at Apple.',
   'exp.growth': 'Growth path',
-  'exp.present': 'Present',
+  'period.range': '{start} to {end}',
+  'period.since': 'Since {start}',
   'exp.current': 'Current',
   'exp.now': 'Now',
   'exp.education': 'Education',
@@ -75,12 +76,12 @@ const en = {
   'services.kicker': 'Services',
   'services.title': 'How I can help your team',
   'services.lede':
-    'For startups and businesses that need a backend done properly — scoped clearly, built with tests and handed over with documentation.',
+    'I work with startups and businesses that need a backend done properly, with a clear scope, tests, and documentation at handover.',
   'services.youGet': 'What you get',
   'services.cta': 'Discuss a project',
 
   'about.kicker': 'About',
-  'about.title': 'A remote backend engineer, working with US and European teams.',
+  'about.title': 'I work remotely with teams in the US and Europe.',
   'about.greatAt': "What I'm great at",
   'about.languages': 'Languages',
   'skills.title': 'Skills',
@@ -102,7 +103,7 @@ const en = {
   'contact.honeypot': 'Leave this field empty',
   'contact.send': 'Send message',
   'contact.sending': 'Sending…',
-  'contact.success': 'Thank you — your message is on its way. I will get back to you by email.',
+  'contact.success': 'Thanks, your message is on its way. I will reply by email.',
   'contact.error.generic': 'Something went wrong. Please try again, or email me directly.',
   'contact.error.rate': 'Too many messages in a short time. Please try again later.',
   'contact.error.captcha': 'Please complete the verification and try again.',
@@ -130,9 +131,9 @@ export type UiKey = keyof typeof en;
 export type UiDictionary = Record<UiKey, string>;
 
 const ar: UiDictionary = {
-  'meta.title': 'أحمد حمارشة — مهندس Backend أول',
+  'meta.title': 'أحمد حمارشة | مهندس Backend أول',
   'meta.description':
-    'مهندس Backend أول يعمل عن بُعد مع عملاء حول العالم. خبرة تزيد عن 5 سنوات في بناء أنظمة الدفع وصرف الأرباح والتحقق من الهوية وتكاملات التجارة الإلكترونية باستخدام Java/Spring Boot و‎.NET‎ وPython/Django.',
+    'أنا مهندس Backend أول أعمل عن بُعد مع عملاء حول العالم. أبني منذ أكثر من 5 سنوات أنظمة الدفع وصرف الأرباح والتحقق من الهوية وتكاملات التجارة الإلكترونية باستخدام Java/Spring Boot و‎.NET‎ وPython/Django.',
   'meta.locale': 'ar_AR',
 
   'a11y.skip': 'انتقل إلى المحتوى',
@@ -143,7 +144,7 @@ const ar: UiDictionary = {
   'nav.about': 'عنّي',
   'nav.contact': 'تواصل',
   'nav.menu': 'القائمة',
-  'nav.home': 'أحمد حمارشة — الصفحة الرئيسية',
+  'nav.home': 'أحمد حمارشة، الصفحة الرئيسية',
 
   'lang.switch': 'English',
   'lang.switchLabel': 'Read this site in English',
@@ -160,7 +161,7 @@ const ar: UiDictionary = {
   'work.kicker': 'أعمال مختارة',
   'work.title': 'دراسات حالة',
   'work.lede':
-    'أنظمة حقيقية، معروضة من خلال المشكلة والبنية والقرارات. أسماء العملاء وبياناتهم تبقى سرّية حيث توجد اتفاقية عدم إفصاح.',
+    'أنظمة بنيتها، أعرضها من خلال المشكلة والبنية والقرارات. وحيث توجد اتفاقية عدم إفصاح، أُبقي أسماء العملاء وبياناتهم سرّية.',
   'work.more': 'دراسات حالة أخرى',
   'work.read': 'اقرأ دراسة الحالة',
   'work.all': 'كل دراسات الحالة',
@@ -185,9 +186,10 @@ const ar: UiDictionary = {
   'exp.kicker': 'الخبرة',
   'exp.title': 'خمس سنوات من النمو في الحجم والمسؤولية.',
   'exp.lede':
-    'بدأت عام 2021 ببناء أنظمة Backend مالية لعملاء أمريكيين، وتطوّرت حتى قُدت إحدى تلك المنصات — ثم المدفوعات والتحقق من الهوية على مستوى شركة اتصالات، ثم خدمات لوجستية مصغّرة مقاومة للأعطال، واليوم منصات هندسية داخلية في Apple.',
+    'بدأت عام 2021 ببناء أنظمة Backend مالية لعملاء أمريكيين، وتطوّرت حتى قُدت إحدى تلك المنصات. بعدها عملت على المدفوعات والتحقق من الهوية على مستوى شركة اتصالات، ثم خدمات لوجستية مصغّرة مقاومة للأعطال، واليوم منصات هندسية داخلية في Apple.',
   'exp.growth': 'مسار التطور',
-  'exp.present': 'حتى الآن',
+  'period.range': 'من {start} إلى {end}',
+  'period.since': 'منذ {start}',
   'exp.current': 'حالياً',
   'exp.now': 'الآن',
   'exp.education': 'التعليم',
@@ -196,12 +198,12 @@ const ar: UiDictionary = {
   'services.kicker': 'الخدمات',
   'services.title': 'كيف أستطيع مساعدة فريقك',
   'services.lede':
-    'للشركات الناشئة والأعمال التي تحتاج Backend مبنياً بالشكل الصحيح — بنطاق واضح، ومع اختبارات، وتسليم موثّق.',
+    'أعمل مع الشركات الناشئة والأعمال التي تحتاج Backend مبنياً بالشكل الصحيح، بنطاق واضح واختبارات وتسليم موثّق.',
   'services.youGet': 'ما الذي تحصل عليه',
   'services.cta': 'ناقش مشروعك',
 
   'about.kicker': 'عنّي',
-  'about.title': 'مهندس Backend يعمل عن بُعد مع فرق في الولايات المتحدة وأوروبا.',
+  'about.title': 'أعمل عن بُعد مع فرق في الولايات المتحدة وأوروبا.',
   'about.greatAt': 'ما أتقنه',
   'about.languages': 'اللغات',
   'skills.title': 'المهارات',
@@ -223,7 +225,7 @@ const ar: UiDictionary = {
   'contact.honeypot': 'اترك هذا الحقل فارغاً',
   'contact.send': 'أرسل الرسالة',
   'contact.sending': 'جارٍ الإرسال…',
-  'contact.success': 'شكراً لك — رسالتك في الطريق. سأردّ عليك عبر البريد الإلكتروني.',
+  'contact.success': 'شكراً لك، رسالتك في الطريق. سأردّ عليك عبر البريد الإلكتروني.',
   'contact.error.generic': 'حدث خطأ ما. حاول مرة أخرى، أو راسلني مباشرة عبر البريد.',
   'contact.error.rate': 'رسائل كثيرة خلال وقت قصير. حاول مرة أخرى لاحقاً.',
   'contact.error.captcha': 'أكمل خطوة التحقق ثم حاول مرة أخرى.',

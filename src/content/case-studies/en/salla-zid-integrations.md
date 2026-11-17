@@ -4,10 +4,10 @@ key: salla-zid-integrations
 order: 3
 kicker: Logistics · E-commerce integrations
 title: Resilient Salla & Zid integrations at Logestechs
-summary: Store orders flowing into shipment tracking and inventory — even when a third-party API is slow or down.
+summary: Store orders flow into shipment tracking and inventory, even when a third-party API is slow or down.
 facts:
   role: Backend Engineer
-  company: Logestechs — logistics software
+  company: Logestechs (logistics software)
   stack: [Java, Spring Boot, Spring Data JPA, MySQL, RabbitMQ, Redis, Resilience4j]
   scope: [Integrations, Resilience, Performance]
 problem: Merchants on Salla and Zid needed their orders to flow into the logistics platform for shipment tracking and inventory. Third-party APIs can be slow or briefly unavailable, and the integration had to keep working through that.
@@ -36,7 +36,7 @@ diagram:
     - { n: 4, x: 956, y: 232 }
 decisions:
   - title: Fail fast, recover gracefully.
-    text: Every Salla and Zid call is wrapped in Resilience4j retries, a circuit breaker and a fallback, so a slow store API can't drag the platform down with it.
+    text: I wrapped every Salla and Zid call in Resilience4j retries, a circuit breaker and a fallback, so a slow store API can't drag the platform down with it.
     marker: 1
   - title: Failed syncs aren't dropped.
     text: When a store API is down, the sync is queued in RabbitMQ and retried later instead of being lost.
@@ -45,7 +45,7 @@ decisions:
     text: RabbitMQ messaging keeps the integration decoupled from the shipment and inventory services.
     marker: 3
   - title: Measure, then tune.
-    text: SQL tuning, indexing and Redis caching on more than 10 high-traffic endpoints.
+    text: I tuned SQL, added indexes and cached with Redis on more than 10 high-traffic endpoints.
     marker: 4
 results:
   - { value: "~15%", label: lower API p95 latency }
